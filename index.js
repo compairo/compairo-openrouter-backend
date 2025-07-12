@@ -30,10 +30,10 @@ app.post("/api/compare", async (req, res) => {
     });
 
     const reply = response.data.choices?.[0]?.message?.content || "No response.";
-    res.json({ reply });
+    res.json({ result: reply }); // <-- FIXED LINE
   } catch (err) {
-    console.error(err.response?.data || err.message);
-    res.status(500).json({ error: "Failed to generate comparison." });
+    console.error("OpenRouter error:", err.response?.data || err.message);
+    res.status(500).json({ error: "Failed to generate comparison from AI." });
   }
 });
 
